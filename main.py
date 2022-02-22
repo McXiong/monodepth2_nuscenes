@@ -38,17 +38,6 @@ def print_nn(mm):
     print('{} : {}'.format('device', device))
 
 
-def collate_fn(batch):
-    mel_group, v_label, a_label = zip(*batch)
-    mel_group = torch.cat(mel_group, dim=0).unsqueeze(dim=1)
-    v_label = torch.cat(v_label, dim=0)
-    a_label = torch.cat(a_label, dim=0)
-
-    v_label = v_label.type(torch.FloatTensor).unsqueeze(dim=1)
-    a_label = a_label.type(torch.FloatTensor).unsqueeze(dim=1)
-    return mel_group, v_label, a_label
-
-
 def create_ds(data_root):
     nusc = Nusc_ds()
     # TODO: finish this
@@ -57,12 +46,12 @@ def create_ds(data_root):
 
 
 def create_tr_dl(dataset):
-    dl_tr = DataLoader(dataset, batch_size=4, shuffle=True, collate_fn=collate_fn)
+    dl_tr = DataLoader(dataset, batch_size=4, shuffle=True)
     return dl_tr
 
 
 def create_val_dl(dataset):
-    val_dl = DataLoader(dataset, batch_size=4, shuffle=False, collate_fn=collate_fn)
+    val_dl = DataLoader(dataset, batch_size=4, shuffle=False)
     return val_dl
 
 
