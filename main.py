@@ -14,8 +14,8 @@ def get_path_prefix():
     machine = os.uname()[1]
     prefix = ''
     # Local machine
-    if machine == 'eihw253':
-        prefix = '/home/xinjing/Documents/gpu5'
+    if machine == '253':
+        prefix = '/home/user/Documents/gpu5'
     return prefix
 
 
